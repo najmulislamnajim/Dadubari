@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="cache-control" content="max-age=604800" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>Dadubari | Your style partner!</title>
+
+<link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+
+<!-- jQuery -->
+<script src="js/jquery-2.0.0.min.js" type="text/javascript"></script>
+
+<!-- Bootstrap4 files-->
+<script src="js/bootstrap.bundle.min.js" type="text/javascript"></script>
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
+
+<!-- Font awesome 5 -->
+<link href="fonts/fontawesome/css/all.min.css" type="text/css" rel="stylesheet">
+
+<!-- custom style -->
+<link href="css/ui.css" rel="stylesheet" type="text/css"/>
+<link href="css/responsive.css" rel="stylesheet" media="only screen and (max-width: 1200px)" />
+
+<!-- custom javascript -->
+<script src="js/script.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+/// some script
+
+// jquery ready start
+$(document).ready(function() {
+	// jQuery code
+
+}); 
+// jquery end
+</script>
+
+</head>
+<body>
+{{request.user}}
+<!-- ========================= SECTION PAGETOP ========================= -->
+<section class="section-pagetop bg">
+<div class="container">
+	<h2 class="title-page">Our Store</h2>
+	
+</div> <!-- container //  -->
+</section>
+<!-- ========================= SECTION INTRO END// ========================= -->
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+<div class="container">
+
+<div class="row">
+	<aside class="col-md-3">
+		
+<div class="card">
+	<article class="filter-group">
+		<header class="card-header">
+			<a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
+				<i class="icon-control fa fa-chevron-down"></i>
+				<h6 class="title">Categories</h6>
+			</a>
+		</header>
+		<div class="filter-content collapse show" id="collapse_1" style="">
+			<div class="card-body">
+				
+				<ul class="list-menu">
+                    {% for category in categories%}
+				    <li><a href="{% url 'category' category_slug=category.slug %}">{{category.category_name}}</a></li>
+                    {% endfor %}
+				
+				</ul>
+
+			</div> <!-- card-body.// -->
+		</div>
+	</article> <!-- filter-group  .// -->
+	
+</div> <!-- card.// -->
+
+	</aside> <!-- col.// -->
+	<main class="col-md-9">
+
+<header class="border-bottom mb-4 pb-3">
+		<div class="form-inline">
+			<span class="mr-md-auto">Showing {{ products.start_index }}-{{ products.end_index }} of {{ products.paginator.count }} Items </span>
+			
+		</div>
+</header><!-- sect-heading -->
+
+{% comment %} product card  {% endcomment %}
+<div class="row">
+	{% for product in products%}
+    <div class="col-md-4">
+		<figure class="card card-product-grid">
+			<div class="img-wrap"> 
+				
+				<img src="{{product.product_image.url}}">
+				
+			</div> <!-- img-wrap.// -->
+			<figcaption class="info-wrap">
+				<div class="fix-height">
+					<a href="{% url 'product_details' product.product_category.slug product.slug %}" class="title">{{product.product_name}}</a>
+					<div class="price-wrap mt-2">
+						<span class="price">{{product.product_price}} tk.</span>
+						{% comment %} <del class="price-old">$1980</del> {% endcomment %}
+					</div> <!-- price-wrap.// -->
+				</div>
+				<a href="#" class="btn btn-block btn-success">Added to cart </a>
+			</figcaption>
+		</figure>
+	</div> <!-- col.// -->
+    {% endfor %}
+</div> <!-- row end.// -->
+
+
+<nav class="mt-4" aria-label="Page navigation sample">
+  <ul class="pagination">
+	{% if products.has_previous %}
+    <li class="page-item "><a class="page-link" href="?page={{products.previous_page_number}}">Previous</a></li>
+	{% else %}
+	<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+	{% endif %}
+	
+	{% for page in products.paginator.page_range %}
+    <li class="page-item active"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+	{% endfor %}
+	{% if products.has_next %}
+    <li class="page-item "><a class="page-link" href="?page={{products.next_page_number}}">Next</a></li>
+	{% else %}
+	<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+	{% endif %}
+  </ul>
+</nav>
+
+	</main> <!-- col.// -->
+
+</div>
+
+</div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+<!-- ========================= FOOTER ========================= -->
+<footer class="section-footer border-top padding-y">
+	<div class="container">
+		<p class="float-md-right"> 
+			&copy Copyright 2019 All rights reserved
+		</p>
+		<p>
+			<a href="#">Terms and conditions</a>
+		</p>
+	</div><!-- //container -->
+</footer>
+<!-- ========================= FOOTER END // ========================= -->
+
+
+
+</body>
+</html>
